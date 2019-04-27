@@ -11,10 +11,7 @@ public class GameManager : MonoBehaviour
 
     void OnGUI()
     {
-        // Make a background box
-        GUI.Label(new Rect(0, 0, 500, 50), "Manten A para generar cubos");
-        GUI.Label(new Rect(0, 15, 500, 50), "Manten S para generar esferas");
-
+        GUI.Label(new Rect(0, 0, 500, 50), "Manten A para generar esferas");
         GUI.Label(new Rect(0, 30, 500, 50), "Número de GameObjects: "+ instances);
 
     }
@@ -23,7 +20,12 @@ public class GameManager : MonoBehaviour
     {
         instances = GameObject.FindGameObjectsWithTag("Instance").Length;
 
-        if (Input.GetKey(KeyCode.A)) Instantiate(cube, new Vector3(0, 5, 0), Random.rotation);
-        if (Input.GetKey(KeyCode.S)) Instantiate(sphere, new Vector3(0, 5, 0), Random.rotation);
+        if (Input.GetKey(KeyCode.A))
+        {
+            GameObject newItem = ObjectPool.Instance.getObject();
+            if ((newItem) != null)
+                newItem.SetActive(true);
+        }
+        //if (Input.GetKey(KeyCode.S)) Instantiate(sphere, new Vector3(0, 5, 0), Random.rotation);
     }
 }
